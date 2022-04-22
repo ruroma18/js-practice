@@ -8,7 +8,7 @@ class Student {
     this.university = university;
     this.dateOfApplication = new Date(dateOfApplication);
     this.contacts = { phoneNumber, email };
-    this.currentGrade = 0;
+    this.currentGrade = this.currentGrade;
   }
 
   get firstName() {
@@ -152,7 +152,43 @@ class University {
 }
 
 const student1 = new Student('User', 'Userenko', 'female', 'ZNU', 'September, 2020', 3809988777, 'user@gmail.com');
-const ZNU = new University('ZNU', 'Math', 'Computer Science', [student1, student1]);
+const student2 = new Student('User', 'Userenko', 'female', 'ZNU', 'September, 2020', 3809988777, 'user@gmail.com');
+const student3 = new Student('User', 'Userenko', 'female', 'ZNU', 'September, 2020', 3809988777, 'user@gmail.com');
+const ZNU = new University('ZNU', 'Math', 'Computer Science', [student1, student2, student3]);
 
+const studentCardList = document.getElementById('studentCardList');
 
+const getStudents = ZNU.students.map((student) => genereteStudentCard(student));
 
+studentCardList.append(...getStudents)
+
+function genereteStudentCard(studentObj) {
+  const fullName = `${studentObj.firstName} ${studentObj.lastName}`;
+  const shortDate = `${(studentObj.dateOfApplication).toLocaleString('default', { month: 'short', year: 'numeric' })}`
+
+  const card = createElement('li', { classNames: ['studentCardWrapper'] });
+
+  const cardArticle = createElement('article', { classNames: ['studentCard'] });
+
+  const cardName = createElement('h2', { classNames: ['studentCardName'] }, fullName)
+
+  const studentInfoList = createElement('ul', {classNames : ['studentInfoList']});
+
+  const studentSex = createElement('li', {}, `Sex: ${studentObj.sex}`);
+  
+  const studentUniversity = createElement('li', {}, `University: ${studentObj.university}`);
+
+  const studentDateOfApplication = createElement('li', {}, `Date of Application: ${shortDate}`);
+
+  const studentGrade = createElement('li', {}, `Grade: ${studentObj.currentGrade}`);
+  
+  const studentPhone = createElement('li', {}, `Phone: ${studentObj.contacts.phoneNumber}`);
+
+  const studentEmail = createElement('li', {}, `Email: ${studentObj.contacts.email}`);
+
+  studentInfoList.append(studentSex, studentUniversity, studentDateOfApplication, studentGrade, studentPhone, studentEmail)
+  cardArticle.append(cardName, studentInfoList);
+  card.append(cardArticle);
+
+  return card;
+}

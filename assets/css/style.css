@@ -1,0 +1,33 @@
+:root {
+  font-size: 16px;
+}
+.studentCardContainer {
+  display: flex;
+  margin: 20px;
+}
+
+.studentCardList {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.studentCardWrapper {
+  width: 300px;
+  margin: 0 10px 10px 0;
+  padding: 20px;
+  background-color: antiquewhite;
+}
+
+.studentCardName {
+  font-size: 2rem;
+  margin-bottom: 20px;
+
+}
+
+.studentInfoList {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.3rem;
+  line-height: 2rem;
+}
